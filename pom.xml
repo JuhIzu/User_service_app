@@ -44,16 +44,8 @@
     <plugins>
       <!-- START Of Plugins -->
         <!-- MAVEN COMPILER PLUGIN -->
-      <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.3</version>
-            <configuration>
-                <includes>
-                    <include>src</include>
-                </includes>
-            </configuration>
-        </plugin>
-<!--         <plugin>
+      
+        <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <version>3.3</version>
@@ -61,7 +53,7 @@
                 <source>1.7</source>
                 <target>1.7</target>
             </configuration>
-        </plugin> -->
+        </plugin>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
@@ -70,6 +62,14 @@
         <groupId>com.microsoft.azure</groupId>
         <artifactId>azure-webapp-maven-plugin</artifactId>
         <version>1.7.0</version>
+        <configuration>
+          <appSettings>
+            <property>
+              <name>Java_OPTS</name>
+              <value>-Dserver.port=80</value>
+            </property>
+          </appSettings>
+        </configuration>
       </plugin>
     </plugins>
   </build>
