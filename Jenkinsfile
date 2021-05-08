@@ -13,7 +13,7 @@ node {
     }
   
     stage('build') {
-      sh 'mvn clean package'
+      sh 'mvn package'
     }
   
     stage('deploy') {
@@ -37,6 +37,10 @@ node {
         // you can also use docker.withRegistry if you add a credential
         sh "docker login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET $loginServer"
         // build image
+        
+        //sh "docker build --tag user-service-custom-image ."
+        //sh "docker run -p 8000:8000 user-service-custom-image"
+        
         def imageWithTag = "$loginServer/$imageName"
         def image = docker.build imageWithTag
         // push image
