@@ -5,19 +5,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.*;
+import java.util.*;
+import java.util.logging.Logger;
 
 @RestController
 public class UserController {
-
+	private static final Logger log;
+	
+	static {
+		System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-7s] %5$s %n");
+		log =Logger.getLogger(DemoApplication.class.getName());
+	    }
 
   	private static String getUsername(int id) 
 	{
+		Properties properties = new Properties();
+		properties.load(UserController.class.getClassLoader().getResourceAsStream("application.properties"));
 		Connection c = null;
 		try 
 		{
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:Users.db");
+			c = DriverManager.getConnection(properties.getProperty("url"), properties);
 			c.setAutoCommit(false);
+			
 			System.out.println("Opened database successfully");
 			String sql = "SELECT Name FROM Users WHERE Id = ?";			  
 			PreparedStatement pstmt  = c.prepareStatement(sql);
