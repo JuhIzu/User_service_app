@@ -32,14 +32,14 @@
     <dependency>
       <groupId>com.jayway.jsonpath</groupId>
       <artifactId>json-path</artifactId>
-      <scope>test</scope>
-      
-      <dependency>
+      <scope>test</scope> 
+    </dependency>
+    
+    <dependency>
             <groupId>com.microsoft.sqlserver</groupId>
             <artifactId>mssql-jdbc</artifactId>
             <version>7.4.1.jre8</version>
         </dependency>
-    </dependency>
   </dependencies>
 
   <properties>
