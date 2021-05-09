@@ -6,15 +6,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import java.sql.*;
 import java.util.*;
-import java.util.logging.Logger;
 
 @RestController
 public class UserController {
-	private static final Logger log;
 	
 	static {
 		System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-7s] %5$s %n");
-		log =Logger.getLogger(DemoApplication.class.getName());
 	    }
 
   	private static String getUsername(int id) 
