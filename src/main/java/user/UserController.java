@@ -4,27 +4,19 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-<<<<<<< HEAD
+
 import java.sql.*;
-import java.util.*;
-=======
->>>>>>> parent of aae32c7 (Update UserController.java)
 
 @RestController
 public class UserController {
 	
-	static {
-		System.setProperty("java.util.logging.SimpleFormatter.format", "[%4$-7s] %5$s %n");
-	    }
 
   	private static String getUsername(int id) {
 		Connection c = null;
 		try {
 			
-			Properties properties = new Properties();
-			properties.load(UserController.class.getClassLoader().getResourceAsStream("application.properties"));
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection(properties.getProperty("url"), properties);
+			c = DriverManager.getConnection("jdbc:sqlite:Users.db");
 			c.setAutoCommit(false);
 			
 			System.out.println("Opened database successfully");
