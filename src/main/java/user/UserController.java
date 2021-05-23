@@ -1,5 +1,9 @@
 package user;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,10 +49,13 @@ public class UserController {
 
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @RequestMapping("/user")
-    public User user(@RequestParam(value = "id", required = false) String idString) {
+    public ResponseEntity<User> user(@RequestParam(value = "id", required = false) String idString) {
 
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		int uid = Integer.parseInt(idString);
         String username = getUsername(uid);
-        return new User(uid, username);
+		User user = new User(uid, username);
+        return new ResponseEntity<User>(user, httpHeaders, HttpStatus.OK);
     }
 }
